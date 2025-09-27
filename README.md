@@ -136,7 +136,7 @@ To use the test plan, you should modify the **CSV Data File Config** and set the
 ```
 jmeter
 ├── Stress_Testing.jmx # the test plan you can use
-└── account.csv        # the csv file that "CSV Data File Settings" in test plan used
+└── account.csv        # the csv file that "CSV Data File Config" in test plan used
 ```
 
 ### Building
