@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:transaction_service_db
+    username: sa
+    password:
+  sql:
+    init:
+      schema-locations: classpath:sql/schema.sql

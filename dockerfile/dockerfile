@@ -1,0 +1,28 @@
+# Use the official OpenJDK 17 slim version as the base image
+FROM openjdk:17-jdk-slim
+
+# Create application running users and groups,
+# and at the same time create the application directory and set permissions
+RUN groupadd -r transactionservice && \
+    useradd -r -g transactionservice transactionservice && \
+    mkdir -p /homework/logs && \
+    chown transactionservice:transactionservice /homework /homework/logs && \
+    chmod 700 /homework/logs
+
+# Set the working directory within the container
+WORKDIR /homework
+
+# Copy the built jar package to the image and directly set the owner and permissions
+COPY --chown=transactionservice:transactionservice --chmod=500 target/TransactionService*.jar app.jar
+
+# Switch to a non-root user to run the container
+USER transactionservice
+
+EXPOSE 10100
+
+# Set to use 75% of the maximum container memory
+# Dump the heap snapshot during OOM
+ENV JAVA_OPTS="-XX:MaxRAMPercentage=75.0 -XX:+ExitOnOutOfMemoryError -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/homework/logs/heapdump.hprof"
+
+# Set the container start command
+CMD java $JAVA_OPTS -jar app.jar

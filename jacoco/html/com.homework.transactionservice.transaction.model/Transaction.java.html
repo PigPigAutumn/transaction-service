@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Transaction.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TransactionService</a> &gt; <a href="index.source.html" class="el_package">com.homework.transactionservice.transaction.model</a> &gt; <span class="el_source">Transaction.java</span></div><h1>Transaction.java</h1><pre class="source lang-java linenums">package com.homework.transactionservice.transaction.model;
+
+import com.baomidou.mybatisplus.annotation.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+/**
+ * Entity of transaction
+ *
+ * @author Jiaqi HUANG
+ * @version 0.0.1-SNAPSHOT
+ * @since 0.0.1-SNAPSHOT
+ */
+@TableName(&quot;t_transaction&quot;)
+@Getter
+<span class="fc" id="L19">@Setter</span>
+<span class="fc" id="L20">public class Transaction {</span>
+
+    @TableId(value = &quot;id&quot;, type = IdType.ASSIGN_ID)
+<span class="fc" id="L23">    private Long id;</span>
+
+    @TableField(&quot;transaction_id&quot;)
+<span class="fc" id="L26">    private String transactionId;</span>
+
+    @TableField(&quot;account&quot;)
+<span class="fc" id="L29">    private String account;</span>
+
+    @TableField(&quot;amount&quot;)
+<span class="fc" id="L32">    private BigDecimal amount;</span>
+
+    @TableField(&quot;balance&quot;)
+<span class="fc" id="L35">    private BigDecimal balance;</span>
+
+    @TableField(&quot;type&quot;)
+<span class="fc" id="L38">    private String type;</span>
+
+    @TableField(&quot;status&quot;)
+<span class="fc" id="L41">    private String status;</span>
+
+    @TableField(&quot;counterparty&quot;)
+<span class="fc" id="L44">    private String counterparty;</span>
+
+    @TableField(&quot;description&quot;)
+<span class="fc" id="L47">    private String description;</span>
+
+    @TableField(value = &quot;create_time&quot;, fill = FieldFill.INSERT)
+<span class="fc" id="L50">    private LocalDateTime createTime;</span>
+
+    @TableField(value = &quot;update_time&quot;, fill = FieldFill.INSERT_UPDATE)
+<span class="fc" id="L53">    private LocalDateTime updateTime;</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

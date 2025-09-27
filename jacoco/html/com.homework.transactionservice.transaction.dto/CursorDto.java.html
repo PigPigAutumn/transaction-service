@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CursorDto.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TransactionService</a> &gt; <a href="index.source.html" class="el_package">com.homework.transactionservice.transaction.dto</a> &gt; <span class="el_source">CursorDto.java</span></div><h1>CursorDto.java</h1><pre class="source lang-java linenums">package com.homework.transactionservice.transaction.dto;
+
+import jakarta.annotation.Nullable;
+import jakarta.validation.constraints.PastOrPresent;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
+
+/**
+ * Cursor Dto
+ *
+ * @author Jiaqi HUANG
+ * @version 0.0.1-SNAPSHOT
+ * @since 0.0.1-SNAPSHOT
+ */
+@Getter
+<span class="nc" id="L19">@Setter</span>
+<span class="nc" id="L20">@NoArgsConstructor</span>
+public class CursorDto {
+
+    @PastOrPresent
+<span class="fc" id="L24">    private LocalDateTime lastCreateTime;</span>
+
+    @Nullable
+<span class="fc" id="L27">    private Long lastId;</span>
+
+    /**
+     * create a cursor
+     *
+     * @param lastId the last transaction id
+     * @param lastCreateTime the last transaction create time
+     */
+<span class="fc" id="L35">    public CursorDto(@Nullable Long lastId, LocalDateTime lastCreateTime) {</span>
+<span class="fc" id="L36">        this.lastId = lastId;</span>
+<span class="fc" id="L37">        this.lastCreateTime = lastCreateTime;</span>
+<span class="fc" id="L38">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

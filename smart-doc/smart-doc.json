@@ -1,0 +1,7 @@
+{
+  "outPath": "smart-doc/docs",
+  "allInOne": true,
+  "serverUrl": "http://localhost:10100",
+  "packageFilters": "com.homework.transactionservice.*",
+  "projectName": "TransactionService API"
+}

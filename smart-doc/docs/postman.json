@@ -1,0 +1,146 @@
+{
+  "info": {
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "800eede2-fc50-43aa-8053-c2726ba62f09",
+    "name": "TransactionService API"
+  },
+  "item": [
+    {
+      "name": "Interface name is not set.",
+      "item": [
+        {
+          "name": "create transaction",
+          "request": {
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 0,\n  \"transactionId\": \"\",\n  \"account\": \"\",\n  \"amount\": 0,\n  \"balance\": 0,\n  \"type\": \"\",\n  \"status\": \"\",\n  \"counterparty\": \"\",\n  \"description\": \"\",\n  \"createTime\": 0,\n  \"updateTime\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/transaction/",
+              "protocol": "http",
+              "path": [
+                "transaction",
+                ""
+              ],
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "query": [],
+              "variable": []
+            },
+            "description": "create transaction",
+            "header": []
+          },
+          "description": "create transaction"
+        },
+        {
+          "name": "delete transaction",
+          "request": {
+            "method": "DELETE",
+            "body": {
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/transaction/:id",
+              "protocol": "http",
+              "path": [
+                "transaction",
+                ":id"
+              ],
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "query": [],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "0",
+                  "description": "transaction id to be deleted"
+                }
+              ]
+            },
+            "description": "delete transaction",
+            "header": []
+          },
+          "description": "delete transaction"
+        },
+        {
+          "name": "update transaction",
+          "request": {
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 0,\n  \"transactionId\": \"\",\n  \"account\": \"\",\n  \"amount\": 0,\n  \"balance\": 0,\n  \"type\": \"\",\n  \"status\": \"\",\n  \"counterparty\": \"\",\n  \"description\": \"\",\n  \"createTime\": 0,\n  \"updateTime\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/transaction/",
+              "protocol": "http",
+              "path": [
+                "transaction",
+                ""
+              ],
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "query": [],
+              "variable": []
+            },
+            "description": "update transaction",
+            "header": []
+          },
+          "description": "update transaction"
+        },
+        {
+          "name": "list transaction",
+          "request": {
+            "method": "GET",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account\": \"\",\n  \"type\": \"\",\n  \"status\": \"\",\n  \"startTime\": 0,\n  \"endTime\": 0,\n  \"lastCreateTime\": 0,\n  \"lastId\": \"\",\n  \"pageIndex\": 0,\n  \"pageSize\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/transaction/list",
+              "protocol": "http",
+              "path": [
+                "transaction",
+                "list"
+              ],
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "query": [],
+              "variable": []
+            },
+            "description": "list transaction",
+            "header": []
+          },
+          "description": "list transaction"
+        }
+      ]
+    }
+  ]
+}

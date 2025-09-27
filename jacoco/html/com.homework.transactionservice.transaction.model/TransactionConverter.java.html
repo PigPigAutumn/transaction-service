@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TransactionConverter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TransactionService</a> &gt; <a href="index.source.html" class="el_package">com.homework.transactionservice.transaction.model</a> &gt; <span class="el_source">TransactionConverter.java</span></div><h1>TransactionConverter.java</h1><pre class="source lang-java linenums">package com.homework.transactionservice.transaction.model;
+
+import com.homework.transactionservice.transaction.dto.TransactionCreateDto;
+import com.homework.transactionservice.transaction.vo.TransactionVO;
+import org.springframework.beans.BeanUtils;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * Converter used to transfer between Entity, DTO, VO
+ *
+ * @author Jiaqi HUANG
+ * @version 0.0.1-SNAPSHOT
+ * @since 0.0.1-SNAPSHOT
+ */
+<span class="nc" id="L17">public class TransactionConverter {</span>
+
+    /**
+     * DTO to Entity
+     *
+     * @param transactionCreateDto the DTO
+     * @return Entity
+     */
+    public static Transaction toEntity(TransactionCreateDto transactionCreateDto) {
+<span class="fc" id="L26">        Transaction transaction = new Transaction();</span>
+<span class="fc" id="L27">        BeanUtils.copyProperties(transactionCreateDto, transaction);</span>
+<span class="fc" id="L28">        return transaction;</span>
+    }
+
+    /**
+     * Entity to VO
+     *
+     * @param transaction the Entity
+     * @return VO
+     */
+    public static TransactionVO toVO(Transaction transaction) {
+<span class="fc" id="L38">        TransactionVO transactionVO = new TransactionVO();</span>
+<span class="fc" id="L39">        BeanUtils.copyProperties(transaction, transactionVO);</span>
+<span class="fc" id="L40">        return transactionVO;</span>
+    }
+
+    /**
+     * Entity list to VO list
+     *
+     * @param transactionList the entity list
+     * @return VO list
+     */
+    public static List&lt;TransactionVO&gt; toVOList(List&lt;Transaction&gt; transactionList) {
+<span class="fc" id="L50">        return transactionList.stream().map(TransactionConverter::toVO).collect(Collectors.toList());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

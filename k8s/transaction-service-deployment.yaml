@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transaction-service
+  labels:
+    app: transaction-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: transaction-service
+  template:
+    metadata:
+      labels:
+        app: transaction-service
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: transaction-service
+          image: transaction-service:latest  # 请替换为你的镜像名称和标签
+          env:
+          - name: SPRING_CONFIG_ADDITIONAL_LOCATION
+            value: "file:/homework/config/"
+          ports:
+            - containerPort: 10100
+          volumeMounts:
+            - name: config-volume
+              mountPath: /homework/config
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /transaction-service/actuator/health/liveness
+              port: 10100
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /transaction-service/actuator/health/readiness
+              port: 10100
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+          lifecycle:
+            preStop:
+              exec:
+                command: [ "/bin/sh", "-c", "sleep 30" ]
+      volumes:
+        - name: config-volume
+          configMap:
+            name: transaction-service-config
+      restartPolicy: Always

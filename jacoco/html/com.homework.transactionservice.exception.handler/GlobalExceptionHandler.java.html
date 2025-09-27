@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="zh"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GlobalExceptionHandler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TransactionService</a> &gt; <a href="index.source.html" class="el_package">com.homework.transactionservice.exception.handler</a> &gt; <span class="el_source">GlobalExceptionHandler.java</span></div><h1>GlobalExceptionHandler.java</h1><pre class="source lang-java linenums">package com.homework.transactionservice.exception.handler;
+
+import com.homework.transactionservice.transaction.vo.Result;
+import com.homework.transactionservice.exception.BaseException;
+import com.homework.transactionservice.exception.enums.ErrorCode;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.util.CollectionUtils;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+
+/**
+ * Global exception handler
+ *
+ * @author Jiaqi HUANG
+ * @version 0.0.1-SNAPSHOT
+ * @since 0.0.1-SNAPSHOT
+ */
+@RestControllerAdvice
+<span class="fc" id="L28">public class GlobalExceptionHandler {</span>
+
+    @Autowired
+    private MessageSource messageSource;
+
+    /**
+     * handle business exception
+     *
+     * @param e businessException throw by service
+     * @return VO Result
+     */
+    @ExceptionHandler(BaseException.class)
+    public Result&lt;Void&gt; handleBaseException(BaseException e) {
+<span class="fc" id="L41">        return Result.fail(e.getCode(), getMessage(e.getMessage(), e.getMessage()));</span>
+    }
+
+    /**
+     * handle validation exception
+     *
+     * @param ex validation exception
+     * @return VO Result
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Result&lt;Void&gt; handleValidationExceptions(MethodArgumentNotValidException ex) {
+<span class="fc" id="L52">        List&lt;String&gt; errorFields = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L53">        ex.getBindingResult().getAllErrors().forEach(error -&gt; {</span>
+<span class="fc" id="L54">            String fieldName = ((FieldError) error).getField();</span>
+<span class="fc" id="L55">            errorFields.add(fieldName);</span>
+<span class="fc" id="L56">        });</span>
+<span class="fc" id="L57">        List&lt;String&gt; errorMessages = Collections.singletonList(String.join(&quot;,&quot;, errorFields));</span>
+<span class="fc" id="L58">        return Result.fail(</span>
+<span class="fc" id="L59">                ErrorCode.VALIDATION_FAILED.getCode(),</span>
+<span class="fc" id="L60">                getMessage(ErrorCode.VALIDATION_FAILED.getMessage(), ErrorCode.VALIDATION_FAILED.getMessage(), errorMessages));</span>
+    }
+
+    /**
+     * handle unexpected exception
+     *
+     * @param e unexpected exception
+     * @return VO Result
+     */
+    @ExceptionHandler(Exception.class)
+    public Result&lt;Void&gt; handleException(Exception e) {
+<span class="nc" id="L71">        return Result.fail(ErrorCode.INTERNAL_ERROR.getCode(),</span>
+<span class="nc" id="L72">                getMessage(ErrorCode.INTERNAL_ERROR.getMessage(), ErrorCode.INTERNAL_ERROR.getMessage()));</span>
+    }
+
+    private String getMessage(String code, String defaultMessage) {
+<span class="pc bpc" id="L76" title="1 of 2 branches missed.">        if (this.messageSource == null) {</span>
+<span class="nc" id="L77">            return defaultMessage;</span>
+        }
+<span class="fc" id="L79">        return messageSource.getMessage(code, null, defaultMessage, getLocale());</span>
+    }
+
+    private String getMessage(String code, String defaultMessage, List&lt;String&gt; argList) {
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">        if (this.messageSource == null) {</span>
+<span class="nc" id="L84">            return defaultMessage;</span>
+        }
+<span class="fc" id="L86">        String[] args = null;</span>
+<span class="pc bpc" id="L87" title="1 of 2 branches missed.">        if (!CollectionUtils.isEmpty(argList)) {</span>
+<span class="fc" id="L88">            args = argList.toArray(new String[0]);</span>
+        }
+<span class="fc" id="L90">        return messageSource.getMessage(code, args, defaultMessage, getLocale());</span>
+    }
+
+    private Locale getLocale() {
+<span class="fc" id="L94">        return LocaleContextHolder.getLocale();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
