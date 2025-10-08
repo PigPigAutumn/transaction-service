@@ -21,32 +21,59 @@ import java.math.BigDecimal;
 @Setter
 public class TransactionCreateDto {
 
+    /**
+     * Transaction id.
+     */
     @NotEmpty
     @Pattern(regexp = PatternRegex.COMMON_REGEX_64)
     private String transactionId;
 
+    /**
+     * Transaction account.
+     */
     @NotEmpty
     @Pattern(regexp = PatternRegex.COMMON_REGEX_64)
     private String account;
 
+    /**
+     * Transaction amount.<br>
+     * Positive values represent income and negative values represent expenditure.
+     */
     @NotNull
     private BigDecimal amount;
 
+    /**
+     * Post-transaction account balance.
+     */
     @DecimalMin(value = "0")
     private BigDecimal balance;
 
+    /**
+     * Transaction type.<br>
+     * The following values are available: TRANSFER, DEPOSIT, WITHDRAW, PAYMENT.
+     */
     @NotEmpty
     @Pattern(regexp = PatternRegex.COMMON_REGEX_16)
     private String type;
 
+    /**
+     * Transaction status.<br>
+     * The following values are available: SUCCESS, FAILED, PROCESSING.
+     */
     @NotEmpty
     @Pattern(regexp = PatternRegex.COMMON_REGEX_16)
     private String status;
 
+    /**
+     * Counterparty information.
+     */
     @NotEmpty
     @Pattern(regexp = PatternRegex.COMMON_REGEX_64)
     private String counterparty;
 
+    /**
+     * Transaction description.
+     */
     @Pattern(regexp = PatternRegex.COMMON_REGEX_128)
     private String description;
 }

@@ -18,8 +18,20 @@ public class Result<T> {
     private static final int SUCCESS = 200;
     private static final String SUCCESS_MSG = "success";
 
+    /**
+     * Result code.<br>
+     * "200" represents success.
+     */
     private int code;
+
+    /**
+     * The readable information corresponding to the result code.
+     */
     private String message;
+
+    /**
+     * Business data.
+     */
     private T data;
 
     /**

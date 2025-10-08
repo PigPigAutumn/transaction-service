@@ -18,9 +18,15 @@ import lombok.Setter;
 @Setter
 public class TransactionUpdateDto {
 
+    /**
+     * The id of the database record.
+     */
     @NotNull
     private Long id;
 
+    /**
+     * The updated transaction status.
+     */
     @NotEmpty
     @Pattern(regexp = PatternRegex.COMMON_REGEX_16)
     private String status;

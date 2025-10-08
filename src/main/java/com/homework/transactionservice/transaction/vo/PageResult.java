@@ -18,6 +18,9 @@ import java.util.List;
 @NoArgsConstructor
 public class PageResult<T> extends Result<List<T>> {
 
+    /**
+     * The pagination cursor of the previous page.
+     */
     private CursorVO cursor;
 
     /**

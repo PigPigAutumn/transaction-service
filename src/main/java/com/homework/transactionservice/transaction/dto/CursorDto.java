@@ -20,9 +20,15 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class CursorDto {
 
+    /**
+     * The creation time of the last record on the previous page.
+     */
     @PastOrPresent
     private LocalDateTime lastCreateTime;
 
+    /**
+     * The id of the last record on the previous page.
+     */
     @Nullable
     private Long lastId;
 

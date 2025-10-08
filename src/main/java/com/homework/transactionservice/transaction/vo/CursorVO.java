@@ -15,7 +15,19 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class CursorVO {
+
+    /**
+     * The creation time of the last record on the previous page.
+     */
     private LocalDateTime lastCreateTime;
+
+    /**
+     * The id of the last record on the previous page.
+     */
     private Long lastId;
+
+    /**
+     * return true when next page existing, otherwise, return false.
+     */
     private boolean hasMore;
 }
